@@ -1,0 +1,41 @@
+.collage {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  gap: 30px;
+  padding: 5vh;
+  width: fit-content;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.side-left {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  display: flex;
+  align-items: center;
+}
+
+.side-right {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  display: flex;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.collage img {
+  height: 180px;
+  object-fit: contain;
+  display: block;
+}
+
+.side-left img,
+.side-right img {
+  height: 330px;
+}

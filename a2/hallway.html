@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+  <head>
+    <title>hallway</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="collage.css" />
+    <style>
+      .collage {
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto auto;
+        column-gap: 30px;
+        row-gap: 100px;
+      }
+
+      .side-left {
+        grid-column: 1;
+        grid-row: 1 / 3;
+      }
+
+      .side-right {
+        grid-column: 3;
+        grid-row: 1 / 3;
+      }
+
+      .row {
+        grid-column: 2;
+      }
+
+      .collage img {
+        height: 160px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="collage">
+      <div class="side-left">
+        <a href="game.html">
+          <img
+            class="clickable-img"
+            src="images/hallway/game.jpeg"
+            title="game room"
+          />
+        </a>
+      </div>
+
+      <div class="row">
+        <a href="computer.html">
+          <img
+            class="clickable-img"
+            src="images/hallway/computer.jpeg"
+            title="computer room"
+          />
+        </a>
+        <a href="cbcb.html">
+          <img
+            class="clickable-img"
+            src="images/hallway/cbcb.jpeg"
+            title="cbcb"
+          />
+        </a>
+        <a href="theater.html">
+          <img
+            class="clickable-img"
+            src="images/hallway/othertheater.jpeg"
+            style="margin-left: 50px"
+            title="other theater door"
+          />
+        </a>
+        <a href="theater.html">
+          <img
+            class="clickable-img"
+            src="images/hallway/theater.jpeg"
+            style="margin-left: 40px"
+            title="theater"
+          />
+        </a>
+        <a href="vento.html">
+          <img
+            class="clickable-img"
+            src="images/hallway/vento.jpeg"
+            style="margin-left: 60px"
+            title="del vento"
+          />
+        </a>
+      </div>
+
+      <div class="side-right">
+        <a href="library.html">
+          <img
+            class="clickable-img"
+            src="images/hallway/library.jpeg"
+            title="library"
+          />
+        </a>
+      </div>
+
+      <div class="row">
+        <img
+          class="inactive-img"
+          src="images/hallway/restrooms.jpeg"
+          style="margin-left: 40px"
+          title="restrooms"
+        />
+        <img
+          class="inactive-img"
+          src="images/hallway/stairs.jpeg"
+          style="margin-left: 48px"
+          title="stairs"
+        />
+        <img
+          class="inactive-img"
+          src="images/hallway/buffalo.jpeg"
+          title="buffalo"
+        />
+        <img
+          class="inactive-img"
+          src="images/hallway/womens.jpeg"
+          title="womens restroom"
+        />
+        <a href="index.html">
+          <img
+            class="clickable-img"
+            src="images/hallway/downstairs.jpeg"
+            title="back to entrance"
+          />
+        </a>
+        <img
+          class="inactive-img"
+          src="images/hallway/upstairs.jpeg"
+          title="stairs to third floor"
+        />
+      </div>
+    </div>
+  </body>
+</html>
