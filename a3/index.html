@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+  <head>
+    <title>computer</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="connectors.css" />
+    <link rel="stylesheet" href="plugs.css" />
+    <link rel="stylesheet" href="hotspots.css" />
+    <link rel="stylesheet" href="canvases.css" />
+  </head>
+  <body style="margin: 0">
+    <div class="scene">
+      <!-- Setup -->
+      <div class="view active" id="setup">
+        <div class="image-wrap">
+          <img src="assets/setup.png" alt="computer setup" id="setup-img" />
+          <img
+            src="assets/setup-on.png"
+            alt="computer setup on"
+            id="setup-on-img"
+          />
+          <div class="hotspot" id="screen-hotspot"></div>
+          <div class="hotspot" id="computer-hotspot"></div>
+          <div class="hotspot" id="monitor-hotspot"></div>
+        </div>
+      </div>
+
+      <!-- Screen -->
+      <div class="view" id="screen">
+        <img
+          class="back"
+          src="assets/back.png"
+          alt="back arrow"
+          id="back-arrow-screen"
+        />
+        <div class="image-wrap">
+          <div id="screen-wrap">
+            <img
+              class="screen"
+              src="assets/screen.png"
+              alt="computer screen"
+              id="screen-img"
+            />
+            <img
+              class="screen"
+              src="assets/screen-on.png"
+              alt="screen on"
+              id="screen-on-img"
+            />
+            <div id="screen-area">
+              <img
+                src="assets/cursors/screen-point.png"
+                alt="screen cursor"
+                id="screen-cursor"
+              />
+              <div id="boot">
+                <img
+                  class="screen"
+                  src="assets/screen-empty.png"
+                  alt="screen empty"
+                  id="screen-empty-boot"
+                />
+                <div id="logo-box">
+                  <img src="assets/logo.png" alt="logo" id="logo-img" />
+                </div>
+              </div>
+              <div id="screen-content">
+                <img
+                  class="screen-content"
+                  src="assets/no-display.png"
+                  alt="screen empty"
+                  id="no-display"
+                />
+                <div class="screen-content" id="desktop">
+                  <img
+                    class="screen-layer"
+                    src="assets/desktop.png"
+                    alt="desktop"
+                    id="screen-desktop"
+                  />
+                  <img
+                    src="assets/browser.png"
+                    alt="browser"
+                    id="screen-browser"
+                  />
+                </div>
+                <div class="screen-content" id="browser-content">
+                  <img
+                    class="screen-layer"
+                    src="assets/newtab.png"
+                    alt="new tab"
+                    id="screen-newtab"
+                  />
+                  <img
+                    class="screen-layer"
+                    src="assets/error.png"
+                    alt="404 error"
+                    id="screen-error"
+                  />
+                  <img
+                    class="screen-layer"
+                    src="assets/success.png"
+                    alt="success"
+                    id="screen-success"
+                  />
+                  <input type="text" id="search-bar" />
+                  <div class="hotspot" id="search-hotspot"></div>
+                  <div class="hotspot" id="browser-close-hotspot"></div>
+                  <img
+                    src="assets/restart.png"
+                    alt="restart"
+                    id="restart-btn"
+                  />
+                </div>
+              </div>
+              <div id="display-change">
+                <img src="assets/display.png" alt="display" id="display" />
+                <img src="assets/select.png" alt="select" id="display-select" />
+              </div>
+            </div>
+          </div>
+          <div class="hotspot" id="screen-hotspot-display"></div>
+          <div class="hotspot" id="screen-hotspot-power"></div>
+          <div class="hotspot" id="screen-hotspot-monitor"></div>
+          <div class="hotspot" id="sticky-note-hotspot"></div>
+        </div>
+      </div>
+
+      <!-- Monitor -->
+      <div class="view" id="monitor">
+        <img
+          class="back"
+          src="assets/back.png"
+          alt="back arrow"
+          id="back-arrow-monitor"
+        />
+
+        <img
+          class="connector monitor"
+          src="assets/power-connector.png"
+          alt="power connector"
+          id="power-computer-top-img"
+        />
+        <img
+          class="connector monitor"
+          src="assets/usb-connector.png"
+          alt="usb connector"
+          id="usb-keyboard-top-img"
+        />
+        <img
+          class="connector monitor"
+          src="assets/usb-connector.png"
+          alt="usb connector"
+          id="usb-mouse-top-img"
+        />
+        <img
+          class="connector monitor"
+          src="assets/hdmi-connector.png"
+          alt="hdmi connector"
+          id="hdmi-top-img"
+        />
+
+        <div class="image-wrap" id="monitor-wrap">
+          <img src="assets/monitor.png" alt="monitor" id="monitor-img" />
+          <img
+            class="plugged"
+            src="assets/hdmi-plugged-back.png"
+            alt="hdmi plugged"
+            id="hdmi-1-top-plugged-img"
+          />
+          <img
+            class="plugged"
+            src="assets/hdmi-plugged-back.png"
+            alt="hdmi plugged"
+            id="hdmi-2-top-plugged-img"
+          />
+          <div class="hotspot" id="monitor-hotspot-hdmi-1"></div>
+          <div class="hotspot" id="monitor-hotspot-hdmi-2"></div>
+          <div class="hotspot" id="monitor-hotspot-display"></div>
+          <div class="hotspot" id="monitor-hotspot-screen"></div>
+        </div>
+        <canvas class="cable-canvas" id="usb-mouse-top-canvas"></canvas>
+        <canvas class="cable-canvas" id="usb-keyboard-top-canvas"></canvas>
+        <canvas class="cable-canvas" id="hdmi-top-canvas"></canvas>
+        <canvas class="cable-canvas" id="power-computer-top-canvas"></canvas>
+      </div>
+
+      <!-- Computer -->
+      <div class="view" id="computer">
+        <img
+          class="back"
+          src="assets/back.png"
+          alt="back arrow"
+          id="back-arrow-computer"
+        />
+        <!-- Connectors -->
+        <img
+          class="connector"
+          src="assets/power-connector.png"
+          alt="power connector"
+          id="power-monitor-img"
+        />
+        <img
+          class="connector"
+          src="assets/usb-connector.png"
+          alt="usb connector"
+          id="usb-mouse-bottom-img"
+        />
+        <img
+          class="connector"
+          src="assets/usb-connector.png"
+          alt="usb connector"
+          id="usb-keyboard-bottom-img"
+        />
+        <img
+          class="connector"
+          src="assets/hdmi-connector.png"
+          alt="hdmi connector"
+          id="hdmi-bottom-img"
+        />
+
+        <img
+          class="connector"
+          src="assets/power-connector.png"
+          alt="power connector"
+          id="power-computer-bottom-img"
+        />
+
+        <!-- Outlet -->
+        <div class="image-wrap" id="outlet-wrap">
+          <img src="assets/outlet.png" alt="outlet" id="outlet-img" />
+          <img
+            class="plugged power"
+            src="assets/power-plugged.png"
+            alt="power plug"
+            id="power-plug-top-img"
+          />
+          <img
+            class="plugged power"
+            src="assets/power-plugged.png"
+            alt="power plug"
+            id="power-plug-bottom-img"
+          />
+          <div class="hotspot" id="outlet-hotspot-top"></div>
+          <div class="hotspot" id="outlet-hotspot-bottom"></div>
+        </div>
+
+        <!-- Computer -->
+        <div class="image-wrap" id="computer-wrap">
+          <img
+            src="assets/computer.png"
+            alt="computer tower"
+            id="computer-img"
+          />
+          <img
+            src="assets/computer-on.png"
+            alt="computer on"
+            id="computer-on-img"
+          />
+          <img
+            class="plugged computer"
+            src="assets/hdmi-plugged.png"
+            alt="hdmi"
+            id="hdmi-computer-plugged-img"
+          />
+          <img
+            class="plugged computer"
+            src="assets/usb-plugged.png"
+            alt="usb 1"
+            id="usb-bottom-1-plugged-img"
+          />
+          <img
+            class="plugged computer"
+            src="assets/usb-plugged.png"
+            alt="usb 2"
+            id="usb-bottom-2-plugged-img"
+          />
+          <div class="hotspot" id="computer-hotspot-power"></div>
+          <div class="hotspot" id="computer-hotspot-hdmi"></div>
+          <div class="hotspot" id="computer-hotspot-usb-top"></div>
+          <div class="hotspot" id="computer-hotspot-usb-bottom"></div>
+        </div>
+      </div>
+
+      <!-- Wires -->
+      <canvas class="cable-canvas" id="usb-mouse-bottom-canvas"></canvas>
+      <canvas class="cable-canvas" id="usb-keyboard-bottom-canvas"></canvas>
+      <canvas class="cable-canvas" id="hdmi-bottom-canvas"></canvas>
+      <canvas class="cable-canvas" id="power-monitor-canvas"></canvas>
+      <canvas class="cable-canvas" id="power-computer-bottom-canvas"></canvas>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+.plugged {
+  position: absolute;
+  display: none;
+  z-index: 12;
+  cursor:
+    url("assets/cursors/grab.png") 11 11,
+    grab;
+}
+
+.plugged.power {
+  left: 26%;
+  width: 50%;
+}
+
+#power-plug-top-img {
+  top: 18%;
+}
+#power-plug-bottom-img {
+  bottom: 20%;
+}
+
+.plugged.computer {
+  right: 55%;
+}
+
+#hdmi-computer-plugged-img {
+  top: 16%;
+  width: 27%;
+}
+
+#usb-bottom-1-plugged-img {
+  top: 33.5%;
+  width: 23%;
+}
+
+#usb-bottom-2-plugged-img {
+  top: 48.5%;
+  width: 23%;
+}
+
+#hdmi-1-top-plugged-img {
+  top: 69%;
+  right: 25%;
+  width: 11%;
+  z-index: 1;
+}
+
+#hdmi-2-top-plugged-img {
+  top: 69%;
+  right: 7%;
+  width: 11%;
+  z-index: 1;
+}

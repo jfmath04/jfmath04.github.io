@@ -1,0 +1,205 @@
+.hotspot {
+  position: absolute;
+  background: transparent;
+  z-index: 11;
+  /* background: rgba(0, 255, 0, 0.4); */
+}
+
+#computer-hotspot {
+  bottom: 0%;
+  left: 46%;
+  width: 30%;
+  height: 12%;
+  cursor:
+    url("assets/cursors/look.png") 10 10,
+    pointer;
+}
+
+#monitor-hotspot {
+  top: 27%;
+  right: 24%;
+  width: 8%;
+  height: 25%;
+  cursor:
+    url("assets/cursors/back.png") 16 16,
+    pointer;
+}
+
+#screen-hotspot {
+  top: 15%;
+  left: 29%;
+  width: 42%;
+  height: 38%;
+  cursor:
+    url("assets/cursors/look.png") 10 10,
+    pointer;
+}
+
+#outlet-hotspot-top {
+  top: 21%;
+  left: 32%;
+  width: 38%;
+  height: 21%;
+}
+
+#outlet-hotspot-bottom {
+  bottom: 25%;
+  left: 32%;
+  width: 38%;
+  height: 21%;
+}
+
+#computer-hotspot-power {
+  top: 7.5%;
+  left: 38%;
+  width: 5.5%;
+  height: 4%;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+#computer-hotspot-hdmi {
+  top: 17%;
+  left: 38.5%;
+  width: 5%;
+  height: 12%;
+}
+
+#computer-hotspot-usb-top {
+  top: 34%;
+  left: 38.5%;
+  width: 5%;
+  height: 10%;
+}
+
+#computer-hotspot-usb-bottom {
+  top: 49%;
+  left: 38.5%;
+  width: 5%;
+  height: 10%;
+}
+
+#monitor-hotspot-hdmi-1 {
+  top: 70%;
+  left: 64%;
+  width: 11%;
+  height: 9%;
+  z-index: 0;
+}
+
+#monitor-hotspot-hdmi-2 {
+  top: 70%;
+  left: 82%;
+  width: 11%;
+  height: 9%;
+  z-index: 0;
+}
+
+/* #monitor-hotspot-display {
+  bottom: 0%;
+  right: 25%;
+  width: 11%;
+  height: 5%;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+} */
+/* 
+#monitor-hotspot-power {
+  bottom: 0%;
+  right: 8%;
+  width: 11%;
+  height: 5%;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+} */
+
+#screen-hotspot-display {
+  bottom: 8.7%;
+  right: 7.7%;
+  width: 4%;
+  height: 2%;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+#screen-hotspot-power {
+  bottom: 8.7%;
+  right: 2.5%;
+  width: 4%;
+  height: 2%;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+#screen-hotspot-monitor {
+  bottom: 15%;
+  right: -2%;
+  width: 6%;
+  height: 50%;
+  cursor:
+    url("assets/cursors/back.png") 0 0,
+    pointer;
+}
+
+#monitor-hotspot-screen {
+  right: -5%;
+  width: 9%;
+  height: 100%;
+  cursor:
+    url("assets/cursors/back.png") 0 0,
+    pointer;
+}
+
+#search-bar {
+  position: absolute;
+  top: 7.9%;
+  left: 2.7%;
+  width: 91%;
+  height: 5%;
+  cursor:
+    url("assets/cursors/text.png") 5 10,
+    text;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: "Courier New", monospace;
+  color: black;
+  caret-color: black;
+  z-index: 10;
+  font-size: 2vh;
+}
+
+#search-hotspot {
+  top: 8%;
+  right: 1%;
+  width: 3%;
+  height: 5%;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+#browser-close-hotspot {
+  top: 1%;
+  right: 0.5%;
+  width: 2.4%;
+  height: 4%;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+#sticky-note-hotspot {
+  bottom: 3%;
+  right: 31%;
+  width: 8%;
+  height: 4%;
+  cursor:
+    url("assets/cursors/copy.png") 10 10,
+    cell;
+}
