@@ -666,6 +666,7 @@ function showScreenContent() {
   if (!computerOn || !activeHdmi) {
     noDisplay.style.display = "block";
     screenActive = noDisplay;
+    toggleBrowserContent(false);
   } else {
     screenDesktop.style.display = "block";
     screenActive = screenDesktop;
@@ -857,11 +858,11 @@ function hideDisplayChange() {
   displayChangeDiv.style.opacity = "0";
   displayVisible = false;
   showScreenContent();
-  updateScreenAreaCursor();
   displayChangeDiv.addEventListener(
     "transitionend",
     () => {
       displayChangeDiv.style.display = "none";
+      updateScreenAreaCursor();
     },
     { once: true },
   );
