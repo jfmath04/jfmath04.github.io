@@ -56,8 +56,9 @@ function makeDraggable(el) {
     el.style.bottom = "";
     el.style.right = "";
 
-    const offsetX = e.clientX - el.offsetLeft;
-    const offsetY = e.clientY - el.offsetTop;
+    const rect = el.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
 
     let lastX = e.clientX;
     let lastY = e.clientY;
@@ -187,6 +188,7 @@ function connectorVisibility(monitorView) {
 function makePortSystem(hotspots, plugImgs, connectors) {
   let pluggedInto = Array(hotspots.length).fill(null);
   let currentDragger = null;
+  let soundPlayed = false;
 
   // When dragging, detect if over a port
   function onDragMove(e) {
@@ -194,6 +196,12 @@ function makePortSystem(hotspots, plugImgs, connectors) {
     const overIndex = hotspots.findIndex(
       (hotspot, index) => el === hotspot && pluggedInto[index] === null,
     );
+    if (overIndex !== -1 && !soundPlayed) {
+      new Audio("assets/plug-in.mp3").play();
+      soundPlayed = true;
+    } else if (overIndex === -1) {
+      soundPlayed = false;
+    }
     currentDragger.style.opacity = overIndex !== -1 ? "0" : "1";
     plugImgs.forEach((plugImg, index) => {
       if (pluggedInto[index] === null) {
@@ -240,7 +248,6 @@ function makePortSystem(hotspots, plugImgs, connectors) {
       wireStartPoints.set(plug, wireStartPoints.get(currentDragger));
       canvases.set(plug, canvases.get(currentDragger));
       pluggedIn.set(currentDragger, true);
-      new Audio("assets/plug-in.mp3").play();
       if (currentDragger === hdmiMonitor || currentDragger === hdmiComputer)
         updateHdmiState(true);
       if (currentDragger === usbMouseBottom) {
@@ -567,6 +574,7 @@ const screenContent = document.getElementById("screen-content");
 const noDisplay = document.getElementById("no-display");
 const screenDesktop = document.getElementById("desktop");
 const screenBrowserContent = document.getElementById("browser-content");
+const desktopBackground = document.getElementById("desktop-background");
 const screenNewTab = document.getElementById("screen-newtab");
 const screenError = document.getElementById("screen-error");
 const screenSuccess = document.getElementById("screen-success");
@@ -650,9 +658,9 @@ function updateMouseState(plugged) {
 }
 
 function updateScreenAreaCursor() {
-  const active = mouse && monitorOn && !booting && hasHdmiContent();
-  screenAreaEl.classList.toggle("mouse-active", active);
-  screenCursor.style.display = active ? "block" : "none";
+  const hasContent = monitorOn && !booting && hasHdmiContent();
+  screenAreaEl.classList.toggle("mouse-active", mouse && hasContent);
+  screenCursor.style.display = hasContent ? "block" : "none";
 }
 
 let screenActive = noDisplay;
@@ -672,6 +680,7 @@ function showScreenContent() {
     screenActive = screenDesktop;
     toggleBrowserContent(browserActive);
   }
+  updateScreenAreaCursor();
 }
 
 function switchScreenContent(screen) {
@@ -687,8 +696,11 @@ function toggleBrowserContent(on) {
   if (on) {
     screenBrowserContent.style.display = "block";
     switchBrowserContent(browserTab);
+    desktopBackground.style.display = "none";
   } else {
     screenBrowserContent.style.display = "none";
+    restart.style.display = "none";
+    desktopBackground.style.display = "";
   }
 }
 
@@ -696,6 +708,8 @@ function switchBrowserContent(tab) {
   browserTab.style.display = "none";
   tab.style.display = "block";
   browserTab = tab;
+  restart.style.display =
+    tab === screenSuccess && successShown ? "block" : "none";
 }
 
 screenBrowser.addEventListener("click", () => {
@@ -711,8 +725,6 @@ browserClose.addEventListener("click", () => {
 target = "w-o-r-l-d-w-i-d-e-w-e-b.org";
 
 let successShown = false;
-let restart = document.getElementById("restart-btn");
-restart.addEventListener("click", () => location.reload());
 
 function launchCats() {
   const area = screenBrowserContent;
@@ -798,7 +810,7 @@ function launchCats() {
           cat.remove();
           if (isLast) restart.style.display = "block";
         });
-    }, index * 700);
+    }, index * 400);
   });
 }
 
@@ -829,8 +841,15 @@ searchBar.addEventListener("paste", (e) => {
 });
 
 browserSearch.addEventListener("click", handleSearch);
+const copyNote = document.getElementById("copy-note");
+copyNote.addEventListener("animationend", () => {
+  copyNote.classList.remove("animating");
+});
 stickyNote.addEventListener("click", () => {
   navigator.clipboard.writeText(target);
+  copyNote.classList.remove("animating");
+  void copyNote.offsetWidth;
+  copyNote.classList.add("animating");
 });
 
 // ******************** Display Select Logic ********************
@@ -855,22 +874,19 @@ function showDisplayChange() {
 }
 
 function hideDisplayChange() {
+  if (displayHideTimer) clearTimeout(displayHideTimer);
+  displayHideTimer = null;
   displayChangeDiv.style.opacity = "0";
   displayVisible = false;
   showScreenContent();
-  displayChangeDiv.addEventListener(
-    "transitionend",
-    () => {
-      displayChangeDiv.style.display = "none";
-      updateScreenAreaCursor();
-    },
-    { once: true },
-  );
+  setTimeout(() => {
+    displayChangeDiv.style.display = "none";
+  }, 500);
 }
 
 screenHotspotDisplay.addEventListener("click", () => {
-  if (!monitorOn || booting) return;
   playButtonPress();
+  if (!monitorOn || booting) return;
   if (displayVisible) {
     displayState = (displayState + 1) % 3;
     displaySelect.style.top = displayPositions[displayState];
@@ -891,34 +907,155 @@ function hasHdmiContent() {
 }
 
 document.addEventListener("mousemove", (e) => {
-  if (!monitorOn || booting || !hasHdmiContent()) {
-    screenCursor.style.display = "none";
-    return;
-  }
+  if (!monitorOn || booting || !hasHdmiContent() || !mouse) return;
 
-  if (mouse) {
-    const rect = screenAreaEl.getBoundingClientRect();
-    const inside =
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom;
-    if (inside) {
-      const wrapRect = screenCursor.parentElement.getBoundingClientRect();
-      const w = screenCursor.naturalWidth;
-      const h = screenCursor.naturalHeight;
-      const x =
-        Math.max(rect.left, Math.min(e.clientX, rect.right - w)) -
-        wrapRect.left;
-      const y =
-        Math.max(rect.top, Math.min(e.clientY, rect.bottom - h)) - wrapRect.top;
-      screenCursor.style.left = x + "px";
-      screenCursor.style.top = y + "px";
-      screenCursor.style.display = "none";
-    } else {
-      screenCursor.style.display = "block";
-    }
+  const rect = screenAreaEl.getBoundingClientRect();
+  const inside =
+    e.clientX >= rect.left &&
+    e.clientX <= rect.right &&
+    e.clientY >= rect.top &&
+    e.clientY <= rect.bottom;
+
+  if (inside) {
+    const wrapRect = screenCursor.parentElement.getBoundingClientRect();
+    const w = screenCursor.naturalWidth;
+    const h = screenCursor.naturalHeight;
+    const x =
+      Math.max(rect.left, Math.min(e.clientX, rect.right - w)) - wrapRect.left;
+    const y =
+      Math.max(rect.top, Math.min(e.clientY, rect.bottom - h)) - wrapRect.top;
+    screenCursor.style.left = x + "px";
+    screenCursor.style.top = y + "px";
+    screenCursor.style.display = "none";
   } else {
     screenCursor.style.display = "block";
   }
+});
+
+// #******************** Restart Logic ********************
+
+let restart = document.getElementById("restart-game");
+let restartComputer = document.getElementById("restart-computer");
+let restartMonitor = document.getElementById("restart-monitor");
+
+restart.addEventListener("click", () => location.reload());
+
+const computerConnectors = [
+  powerComputerBottom,
+  usbMouseBottom,
+  usbKeyboardBottom,
+  hdmiComputer,
+  powerMonitor,
+];
+const computerPlugImgs = [
+  plugBottom,
+  usb1Plug,
+  usb2Plug,
+  hdmiComputerPlug,
+  plugTop,
+];
+
+restartComputer.addEventListener("click", () => {
+  // Restore connectors to CSS default positions
+  computerConnectors.forEach((c) => {
+    c.style.left = "";
+    c.style.top = "";
+    c.style.bottom = "";
+    c.style.right = "";
+    c.style.transform = "";
+    c.style.opacity = "1";
+    c.style.display = "";
+    pluggedIn.set(c, false);
+  });
+
+  // Hide plugged images
+  computerPlugImgs.forEach((p) => {
+    p.style.display = "none";
+    wireStartPoints.delete(p);
+    canvases.delete(p);
+  });
+
+  // Reset states
+  updateComputerState(false);
+  updateMouseState(false);
+  updateKeyboardState(false);
+  updateHdmiState(false);
+  connectorVisibility(false);
+
+  // Reset display panel state
+  if (displayHideTimer) clearTimeout(displayHideTimer);
+  displayHideTimer = null;
+  displayVisible = false;
+  displayState = 0;
+  displayChangeDiv.style.opacity = "0";
+  displayChangeDiv.style.display = "none";
+  displaySelect.style.top = displayPositions[0];
+});
+
+const monitorConnectors = [
+  hdmiMonitor,
+  powerComputerTop,
+  usbMouseTop,
+  usbKeyboardTop,
+];
+const monitorPlugImgs = [hdmi1Plug, hdmi2Plug];
+
+restartMonitor.addEventListener("click", () => {
+  // Restore connectors to CSS default positions
+  monitorConnectors.forEach((c) => {
+    c.style.left = "";
+    c.style.top = "";
+    c.style.bottom = "";
+    c.style.right = "";
+    c.style.transform = "";
+    c.style.opacity = "1";
+    c.style.display = "";
+    pluggedIn.set(c, false);
+  });
+
+  // Hide plugged images
+  monitorPlugImgs.forEach((p) => {
+    p.style.display = "none";
+    wireStartPoints.delete(p);
+    canvases.delete(p);
+  });
+
+  // Reset states
+  updateHdmiState(false);
+  connectorVisibility(true);
+});
+
+// ******************** Help Logic ********************
+
+const helpSetup = document.getElementById("help-setup");
+const setupHelpImg = document.getElementById("setup-help-img");
+helpSetup.addEventListener("click", () => {
+  const visible = setupHelpImg.style.display === "block";
+  setupHelpImg.style.display = visible ? "none" : "block";
+});
+
+const helpComputer = document.getElementById("help-computer");
+const computerHelpWrap = document.getElementById("computer-help-wrap");
+helpComputer.addEventListener("click", () => {
+  computerHelpWrap.classList.toggle("visible");
+});
+
+const helpMonitor = document.getElementById("help-monitor");
+const monitorHelpImg = document.getElementById("monitor-help-img");
+const plugInHelpMonitorImg = document.getElementById(
+  "plug-in-help-monitor-img",
+);
+helpMonitor.addEventListener("click", () => {
+  const hidden =
+    monitorHelpImg.style.visibility === "hidden" ||
+    monitorHelpImg.style.visibility === "";
+  monitorHelpImg.style.visibility = hidden ? "visible" : "hidden";
+  plugInHelpMonitorImg.style.visibility = hidden ? "visible" : "hidden";
+});
+
+const helpScreen = document.getElementById("help-screen");
+const screenHelpImg = document.getElementById("screen-help-img");
+helpScreen.addEventListener("click", () => {
+  const visible = screenHelpImg.style.display === "block";
+  screenHelpImg.style.display = visible ? "none" : "block";
 });

@@ -1,0 +1,68 @@
+.help {
+  position: absolute;
+  height: 4vh;
+  width: auto;
+  z-index: 100;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+#help-setup,
+#help-screen {
+  top: 2%;
+  right: 2%;
+}
+
+.help:hover {
+  transform: scale(1.1);
+}
+
+#help-computer,
+#help-monitor {
+  top: 2%;
+  right: 8vh;
+}
+
+#restart-game {
+  display: none;
+  position: absolute;
+  width: 6%;
+  bottom: 18%;
+  left: 47%;
+  z-index: 25;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+#restart-computer,
+#restart-monitor {
+  position: absolute;
+  height: 4%;
+  top: 2%;
+  right: 1%;
+  z-index: 25;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+.restart:hover {
+  transform: scale(1.05);
+}
+
+.back {
+  position: absolute;
+  bottom: 1%;
+  left: 1%;
+  height: 6vh;
+  z-index: 20;
+  cursor:
+    url("assets/cursors/click.png") 0 0,
+    pointer;
+}
+
+.back:hover {
+  transform: scale(1.1);
+}

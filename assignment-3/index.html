@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="plugs.css" />
     <link rel="stylesheet" href="hotspots.css" />
     <link rel="stylesheet" href="canvases.css" />
+    <link rel="stylesheet" href="buttons.css" />
+    <link rel="icon" href="assets/favicon.png" />
   </head>
   <body style="margin: 0">
     <div class="scene">
@@ -22,7 +24,13 @@
           <div class="hotspot" id="screen-hotspot"></div>
           <div class="hotspot" id="computer-hotspot"></div>
           <div class="hotspot" id="monitor-hotspot"></div>
+          <img
+            src="assets/setup-help.png"
+            alt="setup help"
+            id="setup-help-img"
+          />
         </div>
+        <img class="help" src="assets/help.png" alt="help" id="help-setup" />
       </div>
 
       <!-- Screen -->
@@ -46,6 +54,11 @@
               src="assets/screen-on.png"
               alt="screen on"
               id="screen-on-img"
+            />
+            <img
+              src="assets/screen-help.png"
+              alt="screen help"
+              id="screen-help-img"
             />
             <div id="screen-area">
               <img
@@ -79,6 +92,11 @@
                     id="screen-desktop"
                   />
                   <img
+                    src="assets/desktop-background.png"
+                    alt="desktop background"
+                    id="desktop-background"
+                  />
+                  <img
                     src="assets/browser.png"
                     alt="browser"
                     id="screen-browser"
@@ -107,9 +125,10 @@
                   <div class="hotspot" id="search-hotspot"></div>
                   <div class="hotspot" id="browser-close-hotspot"></div>
                   <img
+                    class="restart"
                     src="assets/restart.png"
-                    alt="restart"
-                    id="restart-btn"
+                    alt="restart game"
+                    id="restart-game"
                   />
                 </div>
               </div>
@@ -124,6 +143,8 @@
           <div class="hotspot" id="screen-hotspot-monitor"></div>
           <div class="hotspot" id="sticky-note-hotspot"></div>
         </div>
+        <img src="assets/copied.png" alt="copy" id="copy-note" />
+        <img class="help" src="assets/help.png" alt="help" id="help-screen" />
       </div>
 
       <!-- Monitor -->
@@ -178,11 +199,28 @@
           <div class="hotspot" id="monitor-hotspot-hdmi-2"></div>
           <div class="hotspot" id="monitor-hotspot-display"></div>
           <div class="hotspot" id="monitor-hotspot-screen"></div>
+          <img
+            src="assets/monitor-help.png"
+            alt="monitor help"
+            id="monitor-help-img"
+          />
         </div>
         <canvas class="cable-canvas" id="usb-mouse-top-canvas"></canvas>
         <canvas class="cable-canvas" id="usb-keyboard-top-canvas"></canvas>
         <canvas class="cable-canvas" id="hdmi-top-canvas"></canvas>
         <canvas class="cable-canvas" id="power-computer-top-canvas"></canvas>
+        <img
+          class="restart"
+          src="assets/restart.png"
+          alt="restart monitor"
+          id="restart-monitor"
+        />
+        <img class="help" src="assets/help.png" alt="help" id="help-monitor" />
+        <img
+          src="assets/plug-in-help.png"
+          alt="plug in"
+          id="plug-in-help-monitor-img"
+        />
       </div>
 
       <!-- Computer -->
@@ -279,6 +317,30 @@
           <div class="hotspot" id="computer-hotspot-hdmi"></div>
           <div class="hotspot" id="computer-hotspot-usb-top"></div>
           <div class="hotspot" id="computer-hotspot-usb-bottom"></div>
+        </div>
+        <img
+          class="restart"
+          src="assets/restart.png"
+          alt="restart computer"
+          id="restart-computer"
+        />
+        <img class="help" src="assets/help.png" alt="help" id="help-computer" />
+        <div id="computer-help-wrap">
+          <img
+            src="assets/outlet-help.png"
+            alt="outlet help"
+            id="outlet-help-img"
+          />
+          <img
+            src="assets/computer-help.png"
+            alt="computer help"
+            id="computer-help-img"
+          />
+          <img
+            src="assets/plug-in-help.png"
+            alt="plug in"
+            id="plug-in-help-computer-img"
+          />
         </div>
       </div>
 

@@ -1,7 +1,9 @@
 .connector {
   position: absolute;
   z-index: 5;
-  cursor: url("assets/cursors/grab.png") 11 11, grab;
+  cursor:
+    url("assets/cursors/grab.png") 11 11,
+    grab;
 }
 
 #hdmi-bottom-img {

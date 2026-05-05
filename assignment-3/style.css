@@ -27,17 +27,17 @@ body.dragging * {
   display: none;
 }
 
+#monitor,
+#computer {
+  overflow: hidden;
+}
+
 .active {
   display: block !important;
 }
 
 .hidden {
   display: none !important;
-}
-
-#setup #monitor #computer {
-  width: 100%;
-  height: 100%;
 }
 
 .image-wrap {
@@ -54,7 +54,7 @@ body.dragging * {
   margin: 0 auto;
 }
 
-#setup img {
+#setup img:not(#help-setup) {
   height: 100vh;
   width: auto;
 }
@@ -67,6 +67,14 @@ body.dragging * {
   position: absolute;
   top: 0;
   left: 0;
+  display: none;
+}
+
+#setup-help-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
   display: none;
 }
 
@@ -100,6 +108,56 @@ body.dragging * {
   transition: opacity 0.5s ease;
 }
 
+#computer-help-img {
+  position: absolute;
+  top: 2%;
+  right: 30vh;
+  height: 57vh;
+  width: auto;
+  z-index: 5;
+}
+
+#monitor-help-img {
+  position: absolute;
+  bottom: -12%;
+  right: -10%;
+  height: 10vh;
+  width: auto;
+  z-index: 5;
+  visibility: hidden;
+}
+
+#plug-in-help-computer-img,
+#plug-in-help-monitor-img {
+  position: absolute;
+  top: 1.5%;
+  right: 15vh;
+  height: 5vh;
+  width: auto;
+  z-index: 5;
+}
+
+#plug-in-help-monitor-img {
+  visibility: hidden;
+}
+
+#outlet-help-img {
+  position: absolute;
+  top: 50%;
+  left: 23%;
+  transform: translateY(-50%);
+  height: 5vh;
+  width: auto;
+}
+
+#computer-help-wrap {
+  visibility: hidden;
+}
+
+#computer-help-wrap.visible {
+  visibility: visible;
+}
+
 #computer-img {
   display: block;
   opacity: 1;
@@ -122,21 +180,6 @@ body.dragging * {
 
 #monitor-img {
   width: 100%;
-}
-
-.back {
-  position: absolute;
-  bottom: 1%;
-  left: 1%;
-  height: 6vh;
-  z-index: 20;
-  cursor:
-    url("assets/cursors/click.png") 0 0,
-    pointer;
-}
-
-.back:hover {
-  transform: scale(1.1);
 }
 
 #screen-wrap {
@@ -174,6 +217,17 @@ body.dragging * {
   left: 50%;
   transform: translateX(-50%);
   transition: opacity 0.5s ease;
+}
+
+#screen-help-img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: auto;
+  z-index: -1;
+  display: none;
 }
 
 #screen-area {
@@ -262,6 +316,15 @@ body.dragging * {
   display: none;
 }
 
+#desktop-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+
 #screen-browser {
   position: absolute;
   z-index: 1;
@@ -312,23 +375,36 @@ body.dragging * {
   overflow: hidden;
 }
 
-#restart-btn {
-  display: none;
-  position: absolute;
-  bottom: 13%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 25;
-  cursor:
-    url("assets/cursors/click.png") 0 0,
-    pointer;
-}
-
-#restart-btn:hover {
-  transform: translate(-50%, -50%) scale(1.05);
-}
-
 #browser-content .screen-layer {
   width: 100%;
   height: auto;
+}
+
+#copy-note {
+  position: fixed;
+  bottom: 1%;
+  right: 3%;
+  height: 5vh;
+  width: auto;
+  transform: translateY(200%);
+  z-index: 100;
+}
+
+#copy-note.animating {
+  animation: copy-note-pop 2.5s ease forwards;
+}
+
+@keyframes copy-note-pop {
+  0% {
+    transform: translateY(200%);
+  }
+  30% {
+    transform: translateY(0);
+  }
+  70% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(200%);
+  }
 }
